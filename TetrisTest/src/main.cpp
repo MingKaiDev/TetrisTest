@@ -16,7 +16,7 @@ int main()
     {
         BeginDrawing();
         ClearBackground(DARKBLUE);
-        DrawText("Hello, Raylib Tetris!", 10, 10, 20, DARKGRAY);
+        grid.DrawGrid();
         EndDrawing();
     }
 
