@@ -7,7 +7,7 @@
 class Block{
     public:
     Block();
-    void DrawBlock();
+    void DrawBlock(int row, int col);
     void MoveBlock(int row, int col);
     void Rotate();
     void Unrotate();

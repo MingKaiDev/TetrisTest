@@ -10,12 +10,12 @@ Block::Block()
     MoveBlock(0,3);
 };
 
-void Block::DrawBlock()
+void Block::DrawBlock(int row, int col)
 {
     std::vector<Position> currentCells = GetPositions();
     for(Position item: currentCells)
     {
-        DrawRectangle(item.col*cellSize+1,item.row*cellSize+1,cellSize-1,cellSize-1,colors[id]);
+        DrawRectangle(item.col*cellSize+col,item.row*cellSize+row,cellSize-1,cellSize-1,colors[id]);
     }
 };
 

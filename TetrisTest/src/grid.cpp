@@ -40,7 +40,7 @@ void Grid::DrawGrid()
         for(int j = 0; j < numCols; j++)
         {
             int cellValue = grid[i][j];
-            DrawRectangle(j*cellSize+1,i*cellSize+1,cellSize-1,cellSize-1,colors[cellValue]);
+            DrawRectangle(j*cellSize+11,i*cellSize+11,cellSize-1,cellSize-1,colors[cellValue]);
 
         }
     }

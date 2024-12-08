@@ -8,6 +8,7 @@ Game::Game()
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
     gameOver = false;
+    score = 0;
 };
 
 Block Game::GetRandomBlock()
@@ -50,6 +51,10 @@ void Game::HandleInput()
     }
     if (IsKeyPressed(KEY_DOWN))
     {
+        if(gameOver == false){
+            UpdateScore(0,1);
+        }
+        
         MoveBlockDirection(1, 0);
     }
     if (IsKeyPressed(KEY_UP))
@@ -90,15 +95,30 @@ bool Game::IsBlockOutside()
 void Game::Draw()
 {
     grid.DrawGrid();
-    currentBlock.DrawBlock();
+    currentBlock.DrawBlock(11,11);
+    switch(nextBlock.id)
+    {
+        case 3:
+            nextBlock.DrawBlock(255,260);
+            break;
+        case 4:
+            nextBlock.DrawBlock(255,260);
+            break;
+        default:
+            nextBlock.DrawBlock(270,270);
+            break;
+    }
 }
 
 void Game::RotateBlock()
 {
-    currentBlock.Rotate();
-    if (IsBlockOutside())
+    if(gameOver == false)
     {
-        currentBlock.Unrotate();
+        currentBlock.Rotate();
+        if (IsBlockOutside())
+        {
+            currentBlock.Unrotate();
+        }
     }
 }
 void Game::LockBlock()
@@ -115,7 +135,8 @@ void Game::LockBlock()
         return;
     }
     nextBlock = GetRandomBlock();
-    grid.ClearFullRows();
+    int rowsCleared = grid.ClearFullRows();
+    UpdateScore(rowsCleared, 0);
 }
 
 bool Game::BlockFits()
@@ -136,4 +157,24 @@ void Game::Reset()
     grid.InitializeGrid();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
+    score = 0;
+}
+
+void Game::UpdateScore(int linesCleared, int MoveDownPoints)
+{
+    switch(linesCleared)
+    {
+        case 1:
+            score += 100;
+            break;
+        case 2:
+            score += 300;
+            break;
+        case 3:
+            score += 500;
+            break;
+        default:
+            break;
+    }
+    score += MoveDownPoints;
 }
