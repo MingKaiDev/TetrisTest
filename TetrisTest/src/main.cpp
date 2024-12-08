@@ -24,7 +24,7 @@ int main()
     while(WindowShouldClose() == false)
     {
         game.HandleInput();
-        if(EventTriggered(0.2)){
+        if(EventTriggered(0.02)){
             game.MoveBlockDirection(1,0);
         }
         BeginDrawing();
