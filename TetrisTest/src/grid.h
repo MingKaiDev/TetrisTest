@@ -8,6 +8,7 @@ public:
     void InitializeGrid();
     void PrintGrid();
     void DrawGrid();
+    bool IsOutSideGrid(int row,int col);
     int grid[20][10];
 private:
     std::vector<Color> colors;

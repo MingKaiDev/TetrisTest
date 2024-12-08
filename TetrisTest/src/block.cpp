@@ -5,13 +5,34 @@ Block::Block()
     cellSize = 30;
     rotationState = 0;
     colors = GetCellColors();
+    rowOffset = 0;
+    colOffset = 0;
+    MoveBlock(0,3);
 };
 
 void Block::DrawBlock()
 {
-    std::vector<Position> currentCells = cells[rotationState];
+    std::vector<Position> currentCells = GetPositions();
     for(Position item: currentCells)
     {
         DrawRectangle(item.col*cellSize+1,item.row*cellSize+1,cellSize-1,cellSize-1,colors[id]);
     }
+};
+
+void Block::MoveBlock(int row, int col)
+{
+    rowOffset += row;
+    colOffset += col;
+};
+
+std::vector<Position> Block::GetPositions()
+{
+    std::vector<Position> currentCells = cells[rotationState];
+    std::vector<Position> positions;
+    for(Position item: currentCells)
+    {
+        Position newPosition = Position(item.row+rowOffset,item.col+colOffset);
+        positions.push_back(newPosition);
+    }
+    return positions;
 };
