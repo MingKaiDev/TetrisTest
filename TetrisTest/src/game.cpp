@@ -41,6 +41,9 @@ void Game::HandleInput(){
     if(IsKeyPressed(KEY_DOWN)){
         MoveBlockDirection(1,0);
     }
+    if(IsKeyPressed(KEY_UP)){
+        RotateBlock();
+    }
 }
 
 void Game::MoveBlockDirection(int x,int y){
@@ -66,4 +69,12 @@ bool Game::IsBlockOutside()
 void Game::Draw(){
     grid.DrawGrid();
     currentBlock.DrawBlock();
+}
+
+void Game::RotateBlock()
+{
+    currentBlock.Rotate();
+    if(IsBlockOutside()){
+        currentBlock.Unrotate();
+    }
 }

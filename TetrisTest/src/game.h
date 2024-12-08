@@ -9,6 +9,7 @@ class Game
         Block GetRandomBlock();
         void GetAllBlocks();
         void Draw();
+        void RotateBlock();
         void HandleInput();
         void MoveBlockDirection(int x, int y);
         Grid grid;

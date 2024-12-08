@@ -23,6 +23,22 @@ void Block::MoveBlock(int row, int col)
 {
     rowOffset += row;
     colOffset += col;
+}
+
+void Block::Rotate() {
+    rotationState++;
+    if(rotationState >= (int)cells.size())
+    {
+        rotationState = 0;
+    }
+}
+void Block::Unrotate()
+{
+    rotationState--;
+    if(rotationState < 0)
+    {
+        rotationState = cells.size()-1;
+    }
 };
 
 std::vector<Position> Block::GetPositions()
