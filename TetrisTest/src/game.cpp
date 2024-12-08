@@ -48,8 +48,11 @@ void Game::HandleInput(){
 
 void Game::MoveBlockDirection(int x,int y){
     currentBlock.MoveBlock(x,y);
-    if(IsBlockOutside()){
+    if(IsBlockOutside() || BlockFits() == false){
         currentBlock.MoveBlock(-x,-y);
+        if(x == 1 && y == 0){
+            LockBlock();
+        }
     }
 }
 
@@ -77,4 +80,27 @@ void Game::RotateBlock()
     if(IsBlockOutside()){
         currentBlock.Unrotate();
     }
+}
+void Game::LockBlock()
+{
+    std::vector<Position> currentCells = currentBlock.GetPositions();
+    for(Position item: currentCells)
+    {
+        grid.grid[item.row][item.col] = currentBlock.id;
+    }
+    currentBlock = nextBlock;
+    nextBlock = GetRandomBlock();
+}
+
+bool Game::BlockFits()
+{
+    std::vector<Position> currentCells = currentBlock.GetPositions();
+    for(Position item: currentCells)
+    {
+        if(grid.IsCellEmpty(item.row,item.col) == false)
+        {
+            return false;
+        }
+    }
+    return true;
 }
